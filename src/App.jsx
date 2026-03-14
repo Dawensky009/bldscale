@@ -4,7 +4,8 @@ import {
   BarChart3, MoveRight, ChevronRight, CheckCircle2,
   Instagram, Twitter, Linkedin, Github, ArrowUp,
   Sparkles, ShoppingBag, Workflow, Database, PlayCircle, Plus,
-  Star, Quote, Users, Clock, ShieldCheck, Mail, Phone, MapPin
+  Star, Quote, Users, Clock, ShieldCheck, Mail, Phone, MapPin,
+  Bot, FastForward, TrendingUp, Award, Laptop, Eye
 } from 'lucide-react';
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 
@@ -63,23 +64,24 @@ const ScrollToTop = () => {
 
 const Navbar = ({ setPage, currentPage }) => (
   <nav className="fixed w-full z-[90] py-8 px-6 md:px-12">
-    <div className="max-w-[1400px] mx-auto flex justify-between items-center bg-white/5 backdrop-blur-xl border border-white/5 rounded-2xl px-10 py-5">
-      <button onClick={() => setPage('home')} className="text-xl font-black tracking-[0.4em] text-white">
+    <div className="max-w-[1400px] mx-auto flex justify-between items-center bg-white/5 backdrop-blur-xl border border-white/5 rounded-2xl px-10 py-5 shadow-2xl">
+      <button onClick={() => setPage('home')} className="text-xl font-black tracking-[0.4em] text-white flex items-center">
         BLD<span className="text-primary">SC</span>
       </button>
       <div className="hidden lg:flex space-x-10 text-[9px] uppercase tracking-[0.5em] font-bold text-gray-500">
         <button onClick={() => setPage('home')} className={`hover:text-primary transition-colors ${currentPage === 'home' ? 'text-primary' : ''}`}>Home</button>
         <div className="relative group">
            <button className="hover:text-primary transition-colors flex items-center">Services <ChevronRight size={10} className="rotate-90 ml-1" /></button>
-           <div className="absolute top-full -left-10 mt-5 w-56 bg-navy-950 border border-white/5 rounded-2xl p-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all">
+           <div className="absolute top-full -left-10 mt-5 w-56 bg-navy-950 border border-white/5 rounded-2xl p-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all shadow-2xl">
               {['Commercial Video', 'Ads Video', 'Website', 'Automation'].map(s => (
                 <button key={s} onClick={() => setPage(s.toLowerCase().replace(' ', '-'))} className="w-full text-left p-3 text-[10px] text-gray-400 hover:text-primary hover:bg-white/5 rounded-xl transition-all uppercase tracking-widest">{s}</button>
               ))}
            </div>
         </div>
         <button onClick={() => setPage('work')} className={`hover:text-primary transition-colors ${currentPage === 'work' ? 'text-primary' : ''}`}>Work</button>
+        <button onClick={() => setPage('team')} className={`hover:text-primary transition-colors ${currentPage === 'team' ? 'text-primary' : ''}`}>Staff</button>
       </div>
-      <button onClick={() => setPage('contact')} className="bg-white text-black text-[10px] font-black uppercase tracking-widest px-8 py-3 rounded-xl hover:bg-primary transition-all">
+      <button onClick={() => setPage('contact')} className="bg-white text-black text-[10px] font-black uppercase tracking-widest px-8 py-3 rounded-xl hover:bg-primary transition-all shadow-lg">
         Inquiry
       </button>
     </div>
@@ -100,23 +102,24 @@ const Hero = ({ setPage }) => {
           <motion.div initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 1 }}>
             <div className="flex items-center space-x-4 mb-10">
                <div className="h-[1px] w-12 bg-primary"></div>
-               <span className="text-[10px] font-black text-primary uppercase tracking-[0.5em]">The Growth Engine</span>
+               <span className="text-[10px] font-black text-primary uppercase tracking-[0.5em]">The AI-First Agency</span>
             </div>
             <h1 className="text-6xl md:text-[160px] font-black leading-[0.85] tracking-tighter text-white mb-10">
-              WE <span className="text-transparent border-white border-[1px] stroke-white px-4 italic" style={{ WebkitTextStroke: '1px white' }}>SCALE</span> <br />
-              YOUR VISION.
+              AI-DRIVEN <br />
+              <span className="text-transparent border-white border-[1px] stroke-white px-4 italic" style={{ WebkitTextStroke: '1px white' }}>SCALE</span> <br />
+              ENGINE.
             </h1>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-4xl">
                <p className="text-gray-500 text-lg md:text-xl font-light leading-relaxed border-l border-white/10 pl-8">
-                 We engineer high-performance digital ecosystems. From cinematic commercials to automated e-commerce engines, we deliver brand authority.
+                 We engineer cinematic AI commercials and automated digital ecosystems that put your brand on hyper-growth mode. 
                </p>
                <div className="flex flex-col justify-end">
                   <button onClick={() => setPage('contact')} className="group flex items-center space-x-6 text-white overflow-hidden">
                     <div className="w-20 h-20 rounded-full border border-white/20 flex items-center justify-center group-hover:bg-primary group-hover:border-primary group-hover:text-black transition-all duration-500">
                       <MoveRight size={32} />
                     </div>
-                    <div className="flex flex-col items-start">
-                       <span className="text-xs font-black uppercase tracking-widest text-primary">Start Scaling</span>
+                    <div className="flex flex-col items-start text-left">
+                       <span className="text-xs font-black uppercase tracking-widest text-primary">Join the Future</span>
                        <span className="text-[10px] font-bold text-gray-600 uppercase tracking-widest">Reserve Your Slot</span>
                     </div>
                   </button>
@@ -126,7 +129,7 @@ const Hero = ({ setPage }) => {
         </div>
         <div className="lg:col-span-4 relative h-[600px] md:h-[900px] flex items-center">
           <motion.div style={{ y, rotate }} className="w-[150%] h-[80%] relative z-10 -ml-32 lg:-ml-64 rounded-3xl overflow-hidden border border-white/5 shadow-2xl">
-            <img src="https://images.pexels.com/photos/3062541/pexels-photo-3062541.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" className="w-full h-full object-cover scale-110" alt="Video Set" />
+            <img src="https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" className="w-full h-full object-cover scale-110" alt="AI Visuals" />
             <div className="absolute inset-0 bg-gradient-to-t from-[#050505]/60 to-transparent"></div>
           </motion.div>
         </div>
@@ -135,9 +138,41 @@ const Hero = ({ setPage }) => {
   );
 };
 
+const ProcessSection = () => {
+  const steps = [
+    { title: "Analysis", desc: "We deep-dive into your data to identify growth bottlenecks.", icon: <BarChart3 /> },
+    { title: "AI Generation", desc: "Our neural engines craft your high-end cinematic commercials.", icon: <Bot /> },
+    { title: "System Build", desc: "We architect your automated e-commerce or landing engine.", icon: <Terminal /> },
+    { title: "Hyper Scale", desc: "Aggressive ad deployment and data-driven optimization.", icon: <TrendingUp /> }
+  ];
+
+  return (
+    <section className="py-40 bg-navy-950 px-6 md:px-12 border-y border-white/5">
+      <div className="max-w-[1400px] mx-auto">
+        <div className="mb-32">
+          <h2 className="text-primary text-[10px] font-black uppercase tracking-[0.5em] mb-4">How We Work</h2>
+          <h3 className="text-5xl md:text-8xl font-black text-white tracking-tighter">THE BLUEPRINT.</h3>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+          {steps.map((s, i) => (
+            <div key={i} className="relative group">
+              <div className="text-primary mb-10 transform group-hover:scale-110 transition-transform">
+                {React.cloneElement(s.icon, { size: 48 })}
+              </div>
+              <h4 className="text-2xl font-bold text-white mb-6">0{i+1}. {s.title}</h4>
+              <p className="text-gray-500 font-light leading-relaxed">{s.desc}</p>
+              <div className="absolute -bottom-10 left-0 w-0 h-[1px] bg-primary group-hover:w-full transition-all duration-700"></div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
 const Testimonials = () => {
   const reviews = [
-    { name: "Jean Marc", role: "CEO, TechFlow", text: "BLDSCALE completely transformed our product launch. The video was cinematic and the sales automation saved us 20 hours a week.", avatar: "https://i.pravatar.cc/100?u=1" },
+    { name: "Jean Marc", role: "CEO, TechFlow", text: "BLDSCALE completely transformed our product launch. The AI video was cinematic and the sales automation saved us 20 hours a week.", avatar: "https://i.pravatar.cc/100?u=1" },
     { name: "Marie L.", role: "Founder, LuxeHaiti", text: "I've worked with many agencies, but none delivered this level of visual quality so fast. Truly the elite choice.", avatar: "https://i.pravatar.cc/100?u=2" },
     { name: "Robert Smith", role: "Marketing Director", text: "Their automated e-commerce setup is a game changer. Our conversion rate jumped by 35% in just one month.", avatar: "https://i.pravatar.cc/100?u=3" }
   ];
@@ -151,7 +186,7 @@ const Testimonials = () => {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
           {reviews.map((r, i) => (
-            <motion.div key={i} whileHover={{ y: -10 }} className="p-12 rounded-[40px] bg-white/5 border border-white/5 relative">
+            <motion.div key={i} whileHover={{ y: -10 }} className="p-12 rounded-[40px] bg-white/5 border border-white/5 relative shadow-xl">
               <Quote className="text-primary mb-8 opacity-20" size={40} />
               <p className="text-gray-400 text-lg font-light leading-relaxed mb-10 italic">"{r.text}"</p>
               <div className="flex items-center space-x-4">
@@ -161,6 +196,37 @@ const Testimonials = () => {
                   <p className="text-primary text-[10px] font-black uppercase tracking-widest">{r.role}</p>
                 </div>
               </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+const TeamSection = () => {
+  const staff = [
+    { name: "Dawensky T.", role: "Founder & Chief Architect", img: "https://images.pexels.com/photos/2182970/pexels-photo-2182970.jpeg?auto=compress&cs=tinysrgb&w=600" },
+    { name: "Daky", role: "AI Creative Lead", img: "https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=600" },
+    { name: "Marcus Vane", role: "E-Commerce Specialist", img: "https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=600" }
+  ];
+
+  return (
+    <section id="staff" className="py-40 bg-[#050505] px-6 md:px-12">
+      <div className="max-w-[1400px] mx-auto">
+        <div className="mb-32">
+          <h2 className="text-primary text-[10px] font-black uppercase tracking-[0.5em] mb-4">The Staff</h2>
+          <h3 className="text-5xl md:text-8xl font-black text-white tracking-tighter">MINDS OF <br /> SCALE.</h3>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+          {staff.map((m, i) => (
+            <motion.div key={i} whileHover={{ y: -10 }} className="group">
+              <div className="aspect-[4/5] rounded-[40px] overflow-hidden mb-8 border border-white/5 grayscale group-hover:grayscale-0 transition-all duration-700 relative">
+                <img src={m.img} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000" alt={m.name} />
+                <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-60"></div>
+              </div>
+              <h4 className="text-3xl font-bold text-white mb-2">{m.name}</h4>
+              <p className="text-primary text-[10px] font-black uppercase tracking-[0.5em]">{m.role}</p>
             </motion.div>
           ))}
         </div>
@@ -180,18 +246,20 @@ const ServicePage = ({ title, desc, features, img, setPage }) => (
              <h2 className="text-primary text-[10px] font-black uppercase tracking-[0.5em] mb-6">Service</h2>
              <h3 className="text-5xl md:text-9xl font-black text-white tracking-tighter leading-none mb-10">{title}</h3>
              <p className="text-gray-400 text-xl font-light leading-relaxed mb-12">{desc}</p>
-             <button onClick={() => setPage('contact')} className="bg-primary text-black font-black py-6 px-16 rounded-2xl hover:bg-white transition-all">GET STARTED</button>
+             <button onClick={() => setPage('contact')} className="bg-primary text-black font-black py-6 px-16 rounded-2xl hover:bg-white transition-all shadow-xl shadow-primary/20">GET STARTED</button>
            </motion.div>
         </div>
-        <div className="rounded-[40px] overflow-hidden h-[600px] border border-white/5">
+        <div className="rounded-[40px] overflow-hidden h-[600px] border border-white/5 shadow-2xl">
            <img src={img} className="w-full h-full object-cover" alt={title} />
         </div>
       </div>
       
       <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-40">
          {features.map((f, i) => (
-           <div key={i} className="p-12 rounded-[40px] bg-white/5 border border-white/5">
-              <CheckCircle2 className="text-primary mb-6" size={32} />
+           <div key={i} className="p-12 rounded-[40px] bg-white/5 border border-white/5 shadow-lg group hover:border-primary/20 transition-all">
+              <div className="text-primary mb-6 group-hover:scale-110 transition-transform inline-block">
+                {f.icon || <CheckCircle2 size={32} />}
+              </div>
               <h4 className="text-2xl font-bold text-white mb-4">{f.name}</h4>
               <p className="text-gray-500 text-sm leading-relaxed">{f.text}</p>
            </div>
@@ -209,16 +277,16 @@ const ContactPage = () => (
          <h3 className="text-5xl md:text-9xl font-black text-white tracking-tighter leading-none mb-10">START <br /> SCALING.</h3>
          <div className="space-y-12 mt-20">
             <div className="flex items-center space-x-6">
-               <div className="w-16 h-16 rounded-full bg-white/5 flex items-center justify-center text-primary border border-white/5"><Mail /></div>
+               <div className="w-16 h-16 rounded-full bg-white/5 flex items-center justify-center text-primary border border-white/5 shadow-inner"><Mail /></div>
                <div><p className="text-[10px] font-black text-gray-600 uppercase tracking-widest">Email</p><p className="text-xl text-white font-bold">hello@bldscale.com</p></div>
             </div>
             <div className="flex items-center space-x-6">
-               <div className="w-16 h-16 rounded-full bg-white/5 flex items-center justify-center text-primary border border-white/5"><Phone /></div>
+               <div className="w-16 h-16 rounded-full bg-white/5 flex items-center justify-center text-primary border border-white/5 shadow-inner"><Phone /></div>
                <div><p className="text-[10px] font-black text-gray-600 uppercase tracking-widest">Phone</p><p className="text-xl text-white font-bold">+509 4000 0000</p></div>
             </div>
          </div>
       </div>
-      <div className="p-12 rounded-[40px] bg-white/5 border border-white/5">
+      <div className="p-12 rounded-[40px] bg-white/5 border border-white/5 shadow-2xl">
          <form className="space-y-8" onSubmit={e => e.preventDefault()}>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                <input type="text" placeholder="Name" className="w-full bg-black/50 border border-white/10 rounded-2xl p-5 text-white outline-none focus:border-primary" />
@@ -271,7 +339,16 @@ function App() {
         {page === 'home' && (
           <motion.div key="home" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
             <Hero setPage={setPage} />
+            <section className="py-24 bg-white/5 border-y border-white/5 flex justify-center items-center space-x-20 overflow-hidden">
+               <div className="flex space-x-20 animate-marquee whitespace-nowrap">
+                  {[...Array(10)].map((_, i) => (
+                    <span key={i} className="text-4xl font-black text-white/5 uppercase italic tracking-widest">AI-FIRST MEDIA • AUTOMATION • GROWTH •</span>
+                  ))}
+               </div>
+            </section>
+            <ProcessSection />
             <Testimonials />
+            <TeamSection />
             <section className="py-40 bg-navy-950 border-y border-white/5 overflow-hidden whitespace-nowrap">
               <div className="animate-marquee flex">
                 {[...Array(2)].map((_, i) => (
@@ -293,13 +370,13 @@ function App() {
           <motion.div key="commercial" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
             <ServicePage 
               title="COMMERCIAL VIDEO" 
-              desc="Cinematic brand stories that build deep emotional trust and position your business as the industry leader."
-              img="https://images.pexels.com/photos/2510428/pexels-photo-2510428.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+              desc="We produce high-end commercials using advanced AI neural engines to craft cinematic brand stories that build deep emotional trust."
+              img="https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
               setPage={setPage}
               features={[
-                { name: "Storyboarding", text: "We craft the perfect narrative for your brand's unique identity." },
-                { name: "4K Production", text: "Elite visual quality that looks stunning on every screen." },
-                { name: "Post-Production", text: "Masterful editing and sound design to capture attention." }
+                { name: "AI Neural Storyboards", text: "We use AI to visualize the perfect narrative before shooting a single frame.", icon: <Bot size={32} /> },
+                { name: "Cinematic AI Generation", text: "Elite visual quality generated and enhanced by high-performance AI models.", icon: <Sparkles size={32} /> },
+                { name: "Emotional Narrative", text: "Crafting stories that resonate deeply with your audience's subconscious.", icon: <Eye size={32} /> }
               ]}
             />
           </motion.div>
@@ -309,13 +386,13 @@ function App() {
           <motion.div key="ads" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
             <ServicePage 
               title="ADS VIDEO" 
-              desc="High-performance, short-form content designed to stop the scroll and drive immediate conversions."
+              desc="Performance-driven content designed by AI psychology tools to stop the scroll and drive immediate hyper-conversions."
               img="https://images.pexels.com/photos/3585088/pexels-photo-3585088.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
               setPage={setPage}
               features={[
-                { name: "Ad Psychology", text: "Videos built on proven triggers to drive rapid sales." },
-                { name: "Platform Optimized", text: "Native formats for TikTok, IG Reels, and FB Ads." },
-                { name: "Rapid Delivery", text: "Get your campaigns running in less than 72 hours." }
+                { name: "AI Conversion Hooks", text: "Using AI to test and generate the most powerful 3-second hooks.", icon: <Zap size={32} /> },
+                { name: "Hyper-Native Formats", text: "Optimized for TikTok, IG Reels, and YouTube Shorts via automated workflows.", icon: <Laptop size={32} /> },
+                { name: "Rapid Scale Delivery", text: "From concept to ad manager in record time with AI assistance.", icon: <FastForward size={32} /> }
               ]}
             />
           </motion.div>
@@ -325,13 +402,13 @@ function App() {
           <motion.div key="web" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
             <ServicePage 
               title="WEBSITE" 
-              desc="Next-gen e-commerce engines and landing pages bult for speed, scalability, and extreme conversion."
+              desc="Bespoke e-commerce engines and neural-optimized landing pages built for extreme speed and global scalability."
               img="https://images.pexels.com/photos/1181244/pexels-photo-1181244.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
               setPage={setPage}
               features={[
-                { name: "Elite UX/UI", text: "Bespoke designs that provide a premium user experience." },
-                { name: "Speed Optimized", text: "Blazing fast load times for higher search rankings." },
-                { name: "Scalable Architecture", text: "Systems that grow as your business expands." }
+                { name: "Neural UX/UI", text: "Design systems optimized by AI for maximum user engagement.", icon: <Cpu size={32} /> },
+                { name: "Scalable Core", text: "Architecture that handles millions of visitors without a single glitch.", icon: <Layers size={32} /> },
+                { name: "Global SEO Engine", text: "Built-in AI tools to dominate search rankings worldwide.", icon: <Globe size={32} /> }
               ]}
             />
           </motion.div>
@@ -341,13 +418,13 @@ function App() {
           <motion.div key="auto" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
             <ServicePage 
               title="AUTOMATION" 
-              desc="Intelligent workflows and CRM integrations that handle your business operations while you sleep."
+              desc="Full-scale autonomous workflows that handle your sales, support, and marketing operations using AI agents."
               img="https://images.pexels.com/photos/373543/pexels-photo-373543.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
               setPage={setPage}
               features={[
-                { name: "CRM Integration", text: "Automate your lead tracking and customer management." },
-                { name: "Sales Bots", text: "24/7 AI-driven assistance for your customers." },
-                { name: "Workflow Audit", text: "We identify and fix bottlenecks in your current operations." }
+                { name: "AI Sales Agents", text: "Automated bots that handle inquiries and close deals 24/7.", icon: <Users size={32} /> },
+                { name: "Workflow Neural", text: "Complex business logic handled by autonomous AI sequences.", icon: <Workflow size={32} /> },
+                { name: "CRM Auto-Pilot", text: "Zero manual entry. Your data manages itself intelligently.", icon: <Database size={32} /> }
               ]}
             />
           </motion.div>
@@ -358,19 +435,26 @@ function App() {
              <section className="pt-40 min-h-screen bg-[#050505] px-6 md:px-12">
                 <div className="max-w-[1400px] mx-auto">
                    <h2 className="text-primary text-[10px] font-black uppercase tracking-[0.5em] mb-6">Archive</h2>
-                   <h3 className="text-5xl md:text-9xl font-black text-white tracking-tighter leading-none mb-20">SELECTED <br /> PROJECTS.</h3>
+                   <h3 className="text-5xl md:text-[140px] font-black text-white tracking-tighter leading-[0.8] mb-20">SELECTED <br /> PROJECTS.</h3>
                    <div className="grid grid-cols-1 md:grid-cols-2 gap-20 mb-40">
                       {[1, 2, 3, 4].map(i => (
                         <div key={i} className="group cursor-pointer">
-                           <div className="aspect-[16/10] rounded-[40px] overflow-hidden mb-10 border border-white/5 relative bg-white/5">
-                              <img src={`https://images.pexels.com/photos/${i === 1 ? '3183150' : i === 2 ? '190819' : i === 3 ? '4483610' : '3373739'}/pexels-photo-${i === 1 ? '3183150' : i === 2 ? '190819' : i === 3 ? '4483610' : '3373739'}.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2`} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" alt="Work" />
+                           <div className="aspect-[16/10] rounded-[60px] overflow-hidden mb-10 border border-white/5 relative bg-white/5 shadow-2xl">
+                              <img src={`https://images.pexels.com/photos/${i === 1 ? '3183150' : i === 2 ? '190819' : i === 3 ? '4483610' : '3373739'}/pexels-photo-${i === 1 ? '3183150' : i === 2 ? '190819' : i === 3 ? '4483610' : '3373739'}.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2`} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 group-hover:scale-105" alt="Work" />
+                              <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-40"></div>
                            </div>
-                           <h4 className="text-3xl font-bold text-white group-hover:text-primary transition-colors italic">0{i} / Global Launch</h4>
+                           <h4 className="text-3xl font-bold text-white group-hover:text-primary transition-colors italic">0{i} / Global Scale Project</h4>
                         </div>
                       ))}
                    </div>
                 </div>
              </section>
+          </motion.div>
+        )}
+
+        {page === 'team' && (
+          <motion.div key="team" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+             <TeamSection />
           </motion.div>
         )}
 
