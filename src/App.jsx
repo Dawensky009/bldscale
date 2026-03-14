@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import * as Lucide from 'lucide-react';
 import { 
   Play, Video, Cpu, Globe, ArrowRight, Layers, Zap, 
   BarChart3, MoveRight, ChevronRight, CheckCircle2,
@@ -326,6 +327,7 @@ function App() {
   const [page, setPage] = useState('home');
 
   useEffect(() => {
+    console.log("App mounted on page:", page);
     window.scrollTo(0, 0);
   }, [page]);
 
