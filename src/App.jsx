@@ -7,7 +7,7 @@ import {
   Sparkles, ShoppingBag, Workflow, Database, PlayCircle, Plus,
   Star, Quote, Users, Clock, ShieldCheck, Mail, Phone, MapPin,
   Bot, FastForward, TrendingUp, Award, Laptop, Eye, Terminal,
-  TrendingDown, ThumbsUp, Trophy, Check
+  TrendingDown, ThumbsUp, Trophy, Check, Target
 } from 'lucide-react';
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 
@@ -93,18 +93,12 @@ const Hero = () => {
   const [text, setText] = useState("");
   const fullText = "AI-DRIVEN SCALE ENGINE.";
   const [index, setIndex] = useState(0);
-  const audioRef = useRef(new Audio("https://cdn.pixabay.com/audio/2022/03/15/audio_732a39460a.mp3"));
 
   useEffect(() => {
     if (index < fullText.length) {
       const timeout = setTimeout(() => {
         setText((prev) => prev + fullText[index]);
         setIndex((prev) => prev + 1);
-        if (audioRef.current) {
-          audioRef.current.currentTime = 0;
-          audioRef.current.volume = 0.2;
-          audioRef.current.play().catch(() => {});
-        }
       }, 70);
       return () => clearTimeout(timeout);
     }
