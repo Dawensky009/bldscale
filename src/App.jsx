@@ -96,6 +96,27 @@ const Hero = ({ setPage }) => {
   const y = useTransform(scrollY, [0, 500], [0, 150]);
   const rotate = useTransform(scrollY, [0, 1000], [0, 15]);
 
+  const [text, setText] = useState("");
+  const fullText = "AI-DRIVEN SCALE ENGINE.";
+  const [index, setIndex] = useState(0);
+  const audioRef = useRef(new Audio("https://cdn.pixabay.com/audio/2022/03/15/audio_732a39460a.mp3")); // Mechanical keyboard click
+
+  useEffect(() => {
+    if (index < fullText.length) {
+      const timeout = setTimeout(() => {
+        setText((prev) => prev + fullText[index]);
+        setIndex((prev) => prev + 1);
+        // Play sound
+        if (audioRef.current) {
+          audioRef.current.currentTime = 0;
+          audioRef.current.volume = 0.2;
+          audioRef.current.play().catch(() => {}); // Catch block for auto-play restrictions
+        }
+      }, 70);
+      return () => clearTimeout(timeout);
+    }
+  }, [index, fullText]);
+
   return (
     <section className="relative min-h-screen flex items-center bg-[#050505] overflow-hidden pt-20">
       <div className="max-w-[1500px] mx-auto px-6 md:px-12 w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
@@ -105,11 +126,27 @@ const Hero = ({ setPage }) => {
                <div className="h-[1px] w-12 bg-primary"></div>
                <span className="text-[10px] font-black text-primary uppercase tracking-[0.5em]">The AI-First Agency</span>
             </div>
-            <h1 className="text-6xl md:text-[160px] font-black leading-[0.85] tracking-tighter text-white mb-10">
-              AI-DRIVEN <br />
-              <span className="text-transparent border-white border-[1px] stroke-white px-4 italic" style={{ WebkitTextStroke: '1px white' }}>SCALE</span> <br />
-              ENGINE.
-            </h1>
+            
+            <div className="min-h-[250px] md:min-h-[450px]">
+              <h1 className="text-6xl md:text-[130px] lg:text-[160px] font-black leading-[0.85] tracking-tighter text-white mb-10">
+                {text.split(" ").map((word, i) => (
+                  <React.Fragment key={i}>
+                    {word === "SCALE" ? (
+                      <span className="text-transparent border-white border-[1px] stroke-white px-4 italic" style={{ WebkitTextStroke: '1px white' }}>
+                        {word}
+                      </span>
+                    ) : (
+                      word
+                    )}
+                    {" "}
+                    {i === 0 && <br />}
+                    {i === 1 && <br />}
+                  </React.Fragment>
+                ))}
+                <span className="inline-block w-2 h-16 md:w-4 md:h-32 bg-primary ml-2 animate-pulse align-middle"></span>
+              </h1>
+            </div>
+            
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-4xl">
                <p className="text-gray-500 text-lg md:text-xl font-light leading-relaxed border-l border-white/10 pl-8">
                  We engineer cinematic AI commercials and automated digital ecosystems that put your brand on hyper-growth mode. 
