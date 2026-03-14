@@ -194,6 +194,43 @@ const SocialProof = () => (
   </section>
 );
 
+const ConversionProcess = () => {
+  const steps = [
+    { title: "Strategic Audit", desc: "We dissect your current sales process to find every leaking dollar.", icon: <Eye /> },
+    { title: "AI Neural Assets", desc: "We generate cinematic video ads that stop the scroll instantly.", icon: <Bot /> },
+    { title: "Conversion Engine", desc: "We build your high-converting, automated sales infrastructure.", icon: <Zap /> },
+    { title: "Aggressive Scale", desc: "Data-driven ad deployment to multiply your revenue 24/7.", icon: <TrendingUp /> }
+  ];
+
+  return (
+    <section className="py-40 bg-[#050505] px-6 md:px-12 border-b border-white/5">
+      <div className="max-w-[1400px] mx-auto">
+        <div className="mb-32 flex flex-col md:flex-row justify-between items-end gap-10">
+          <div>
+            <h2 className="text-primary text-[10px] font-black uppercase tracking-[0.5em] mb-4">The Conversion Formula</h2>
+            <h3 className="text-5xl md:text-9xl font-black text-white tracking-tighter leading-none">HOW WE <br /> DOMINATE.</h3>
+          </div>
+          <p className="text-gray-500 max-w-sm font-light text-lg border-l border-primary pl-8">
+            Most agencies guess. We engineer. Using neural intelligence to predict and drive human action.
+          </p>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {steps.map((s, i) => (
+            <motion.div key={i} whileHover={{ y: -10 }} className="p-12 rounded-[40px] bg-white/5 border border-white/5 group relative overflow-hidden">
+              <div className="text-primary mb-12 transform group-hover:scale-110 transition-transform">
+                {React.cloneElement(s.icon, { size: 48 })}
+              </div>
+              <h4 className="text-2xl font-bold text-white mb-6 uppercase">0{i+1}. {s.title}</h4>
+              <p className="text-gray-400 font-light leading-relaxed">{s.desc}</p>
+              <div className="ai-scan opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
 const ServiceModal = ({ isOpen, onClose, service }) => {
   const [index, setIndex] = useState(0);
   const projects = service?.projects || [];
@@ -430,7 +467,7 @@ const WorkArchive = () => (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-20">
            {[1, 2, 3, 4].map(i => (
              <div key={i} className="group cursor-pointer">
-                <div className="aspect-[16/11] rounded-[60px] overflow-hidden mb-12 border border-white/5 relative bg-white/5 shadow-2xl">
+                <div className="aspect-[16/11] rounded-[60px] overflow-hidden mb-12 border border-white/5 relative bg-white/5 shadow-2xl overflow-hidden">
                    <img src={`https://images.pexels.com/photos/${i === 1 ? '3183150' : i === 2 ? '190819' : i === 3 ? '4483610' : '3373739'}/pexels-photo-${i === 1 ? '3183150' : i === 2 ? '190819' : i === 3 ? '4483610' : '3373739'}.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2`} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 group-hover:scale-105" alt="Work" />
                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent opacity-60"></div>
                    <div className="absolute top-10 left-10 bg-black/60 backdrop-blur-md px-6 py-2 rounded-full border border-white/10 text-[9px] font-black text-white uppercase tracking-widest">Case Study 0{i}</div>
@@ -463,7 +500,7 @@ const StaffSection = () => {
       <div className="max-w-[1400px] mx-auto">
         <div className="mb-32">
           <h2 className="text-primary text-[10px] font-black uppercase tracking-[0.5em] mb-4">The Staff</h2>
-          <h3 className="text-5xl md:text-9xl font-black text-white tracking-tighter">MINDS OF <br /> SCALE.</h3>
+          <h3 className="text-5xl md:text-9xl font-black text-white tracking-tighter uppercase">MINDS OF <br /> SCALE.</h3>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           {staff.map((m, i) => (
