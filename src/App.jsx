@@ -6,7 +6,7 @@ import {
   Instagram, Twitter, Linkedin, Github, ArrowUp,
   Sparkles, ShoppingBag, Workflow, Database, PlayCircle, Plus,
   Star, Quote, Users, Clock, ShieldCheck, Mail, Phone, MapPin,
-  Bot, FastForward, TrendingUp, Award, Laptop, Eye
+  Bot, FastForward, TrendingUp, Award, Laptop, Eye, Terminal
 } from 'lucide-react';
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 
