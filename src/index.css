@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #00F0FF; /* Electric Cyan */
-  --color-secondary: #7000FF; /* Midnight Violet */
+  --color-primary: #D4AF37; /* Gold 500 */
+  --color-secondary: #B8860B; /* Gold 600 */
   --color-accent: #FFFFFF;
   
   --color-navy-900: #0A0E1A;
@@ -31,14 +31,14 @@ body {
   background: #050505;
 }
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(to bottom, #00F0FF, #7000FF);
+  background: #D4AF37;
   border-radius: 10px;
 }
 
 .cursor-dot {
   width: 6px;
   height: 6px;
-  background-color: #00F0FF;
+  background-color: #D4AF37;
   position: fixed;
   border-radius: 50%;
   pointer-events: none;
@@ -47,7 +47,7 @@ body {
 .cursor-outline {
   width: 35px;
   height: 35px;
-  border: 1px solid rgba(0, 240, 255, 0.3);
+  border: 1px solid rgba(212, 175, 55, 0.3);
   position: fixed;
   border-radius: 50%;
   pointer-events: none;
@@ -79,7 +79,7 @@ body {
   z-index: -1;
   margin: -1px;
   border-radius: inherit;
-  background: linear-gradient(to right, #00F0FF, #7000FF);
+  background: linear-gradient(to right, #D4AF37, #B8860B);
 }
 
 @keyframes scan {
@@ -90,6 +90,6 @@ body {
   position: absolute;
   height: 50%;
   width: 100%;
-  background: linear-gradient(to bottom, transparent, rgba(0, 240, 255, 0.1), transparent);
+  background: linear-gradient(to bottom, transparent, rgba(212, 175, 55, 0.1), transparent);
   animation: scan 4s linear infinite;
 }
