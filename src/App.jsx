@@ -141,10 +141,10 @@ const Hero = ({ setPage }) => {
 
 const ProcessSection = () => {
   const steps = [
-    { title: "Analysis", desc: "We deep-dive into your data to identify growth bottlenecks.", icon: <BarChart3 /> },
-    { title: "AI Generation", desc: "Our neural engines craft your high-end cinematic commercials.", icon: <Bot /> },
-    { title: "System Build", desc: "We architect your automated e-commerce or landing engine.", icon: <Terminal /> },
-    { title: "Hyper Scale", desc: "Aggressive ad deployment and data-driven optimization.", icon: <TrendingUp /> }
+    { title: "Analysis", desc: "We deep-dive into your data to identify growth bottlenecks.", icon: <BarChart3 size={48} /> },
+    { title: "AI Generation", desc: "Our neural engines craft your high-end cinematic commercials.", icon: <Bot size={48} /> },
+    { title: "System Build", desc: "We architect your automated e-commerce or landing engine.", icon: <Terminal size={48} /> },
+    { title: "Hyper Scale", desc: "Aggressive ad deployment and data-driven optimization.", icon: <TrendingUp size={48} /> }
   ];
 
   return (
@@ -158,7 +158,7 @@ const ProcessSection = () => {
           {steps.map((s, i) => (
             <div key={i} className="relative group">
               <div className="text-primary mb-10 transform group-hover:scale-110 transition-transform">
-                {React.cloneElement(s.icon, { size: 48 })}
+                {s.icon}
               </div>
               <h4 className="text-2xl font-bold text-white mb-6">0{i+1}. {s.title}</h4>
               <p className="text-gray-500 font-light leading-relaxed">{s.desc}</p>
