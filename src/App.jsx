@@ -7,7 +7,7 @@ import {
   Sparkles, ShoppingBag, Workflow, Database, PlayCircle, Plus,
   Star, Quote, Users, Clock, ShieldCheck, Mail, Phone, MapPin,
   Bot, FastForward, TrendingUp, Award, Laptop, Eye, Terminal,
-  TrendingDown, ThumbsUp, Trophy, Check, Target
+  TrendingDown, ThumbsUp, Trophy, Check, Target, X, ChevronLeft
 } from 'lucide-react';
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 
@@ -77,7 +77,7 @@ const Navbar = () => (
         <a href="#testimonials" className="hover:text-primary transition-colors">Testimonials</a>
       </div>
       <a href="#contact" className="bg-white text-black text-[10px] font-black uppercase tracking-widest px-8 py-3 rounded-xl hover:bg-primary transition-all shadow-lg">
-        Inquire
+        Inquiry
       </a>
     </div>
   </nav>
@@ -91,18 +91,32 @@ const Hero = () => {
   const rotate = useTransform(scrollY, [0, 1000], [0, 15]);
 
   const [text, setText] = useState("");
-  const fullText = "AI-DRIVEN SCALE ENGINE.";
-  const [index, setIndex] = useState(0);
-
+  const phrases = ["AI-DRIVEN SCALE ENGINE.", "CINEMATIC BRAND STORIES.", "AUTONOMOUS GROWTH CORE."];
+  const [phraseIndex, setPhraseIndex] = useState(0);
+  const [charIndex, setCharIndex] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
+  
   useEffect(() => {
-    if (index < fullText.length) {
-      const timeout = setTimeout(() => {
-        setText((prev) => prev + fullText[index]);
-        setIndex((prev) => prev + 1);
-      }, 70);
-      return () => clearTimeout(timeout);
-    }
-  }, [index, fullText]);
+    const currentPhrase = phrases[phraseIndex];
+    const typingSpeed = isDeleting ? 40 : 80;
+
+    const timeout = setTimeout(() => {
+      if (!isDeleting && charIndex < currentPhrase.length) {
+        setText((prev) => prev + currentPhrase[charIndex]);
+        setCharIndex((prev) => prev + 1);
+      } else if (isDeleting && charIndex > 0) {
+        setText((prev) => prev.slice(0, -1));
+        setCharIndex((prev) => prev - 1);
+      } else if (!isDeleting && charIndex === currentPhrase.length) {
+        setTimeout(() => setIsDeleting(true), 2000);
+      } else if (isDeleting && charIndex === 0) {
+        setIsDeleting(false);
+        setPhraseIndex((prev) => (prev + 1) % phrases.length);
+      }
+    }, typingSpeed);
+
+    return () => clearTimeout(timeout);
+  }, [charIndex, isDeleting, phraseIndex, phrases]);
 
   return (
     <section id="home" className="relative min-h-screen flex items-center bg-[#050505] overflow-hidden pt-20">
@@ -115,10 +129,10 @@ const Hero = () => {
             </div>
             
             <div className="min-h-[250px] md:min-h-[450px]">
-              <h1 className="text-6xl md:text-[130px] lg:text-[160px] font-black leading-[0.85] tracking-tighter text-white mb-10 uppercase">
+              <h1 className="text-6xl md:text-[130px] lg:text-[150px] font-black leading-[0.85] tracking-tighter text-white mb-10 uppercase">
                 {text.split(" ").map((word, i) => (
                   <React.Fragment key={i}>
-                    {word === "SCALE" ? (
+                    {word === "SCALE" || word === "BRAND" || word === "GROWTH" ? (
                       <span className="text-transparent border-white border-[1px] stroke-white px-4 italic" style={{ WebkitTextStroke: '1px white' }}>
                         {word}
                       </span>
@@ -153,9 +167,9 @@ const Hero = () => {
           </motion.div>
         </div>
         <div className="lg:col-span-4 relative h-[600px] md:h-[900px] flex items-center">
-          <motion.div style={{ y, rotate }} className="w-[150%] h-[80%] relative z-10 -ml-32 lg:-ml-64 rounded-3xl overflow-hidden border border-white/5 shadow-2xl">
-            <img src="https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" className="w-full h-full object-cover scale-110" alt="AI Visuals" />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#050505]/60 to-transparent"></div>
+          <motion.div style={{ y, rotate }} className="w-[150%] h-[80%] relative z-10 -ml-32 lg:-ml-64 rounded-[60px] overflow-hidden border border-white/5 shadow-2xl">
+            <img src="https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" className="w-full h-full object-cover scale-110 grayscale" alt="Bespoke Architecture" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#050505]/80 to-transparent"></div>
           </motion.div>
         </div>
       </div>
@@ -180,49 +194,117 @@ const SocialProof = () => (
   </section>
 );
 
-const ConversionProcess = () => {
-  const steps = [
-    { title: "Strategic Audit", desc: "We dissect your current sales process to find every leaking dollar.", icon: <Eye /> },
-    { title: "AI Neural Assets", desc: "We generate cinematic video ads that stop the scroll instantly.", icon: <Bot /> },
-    { title: "Conversion Engine", desc: "We build your high-converting, automated sales infrastructure.", icon: <Zap /> },
-    { title: "Aggressive Scale", desc: "Data-driven ad deployment to multiply your revenue 24/7.", icon: <TrendingUp /> }
-  ];
+const ServiceModal = ({ isOpen, onClose, service }) => {
+  const [index, setIndex] = useState(0);
+  const projects = service?.projects || [];
+
+  const next = () => setIndex((prev) => (prev + 1) % projects.length);
+  const prev = () => setIndex((prev) => (prev - 1 + projects.length) % projects.length);
+
+  if (!isOpen) return null;
 
   return (
-    <section className="py-40 bg-[#050505] px-6 md:px-12 border-b border-white/5">
-      <div className="max-w-[1400px] mx-auto">
-        <div className="mb-32 flex flex-col md:flex-row justify-between items-end gap-10">
-          <div>
-            <h2 className="text-primary text-[10px] font-black uppercase tracking-[0.5em] mb-4">The Conversion Formula</h2>
-            <h3 className="text-5xl md:text-9xl font-black text-white tracking-tighter leading-none">HOW WE <br /> DOMINATE.</h3>
-          </div>
-          <p className="text-gray-500 max-w-sm font-light text-lg border-l border-primary pl-8">
-            Most agencies guess. We engineer. Using neural intelligence to predict and drive human action.
-          </p>
+    <motion.div 
+      initial={{ opacity: 0 }} 
+      animate={{ opacity: 1 }} 
+      exit={{ opacity: 0 }}
+      className="fixed inset-0 z-[100] flex items-center justify-center bg-black/95 backdrop-blur-2xl p-6 md:p-20"
+    >
+      <button onClick={onClose} className="absolute top-10 right-10 text-white hover:text-primary transition-colors z-[110]">
+        <X size={40} />
+      </button>
+
+      <div className="max-w-7xl w-full h-full flex flex-col justify-center relative">
+        <div className="mb-10">
+          <h2 className="text-primary text-[10px] font-black uppercase tracking-[0.5em] mb-4">Case Study / {service.title}</h2>
+          <h3 className="text-4xl md:text-7xl font-black text-white tracking-tighter uppercase">{projects[index]?.name}</h3>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {steps.map((s, i) => (
-            <motion.div key={i} whileHover={{ y: -10 }} className="p-12 rounded-[40px] bg-white/5 border border-white/5 group relative overflow-hidden">
-              <div className="text-primary mb-12 transform group-hover:scale-110 transition-transform">
-                {React.cloneElement(s.icon, { size: 48 })}
+
+        <div className="relative flex-grow flex items-center justify-center">
+          <AnimatePresence mode="wait">
+            <motion.div 
+              key={index}
+              initial={{ x: 100, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              exit={{ x: -100, opacity: 0 }}
+              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+              className="w-full h-full rounded-[40px] overflow-hidden border border-white/5 relative"
+            >
+              <img src={projects[index]?.img} className="w-full h-full object-cover" alt={projects[index]?.name} />
+              <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
+              
+              <div className="absolute bottom-12 left-12 right-12 flex flex-col md:flex-row justify-between items-end gap-8">
+                 <div className="max-w-xl">
+                    <p className="text-gray-300 text-lg md:text-2xl font-light leading-relaxed mb-6 italic">"{projects[index]?.desc}"</p>
+                    <div className="flex items-center space-x-6">
+                       <div className="bg-primary text-black px-4 py-1 rounded-full text-[10px] font-black uppercase">Live Link</div>
+                       <div className="text-white text-xs font-bold uppercase tracking-widest flex items-center gap-2">Project Video <Play size={12} fill="white" /></div>
+                    </div>
+                 </div>
+                 <div className="flex space-x-4">
+                    <button onClick={prev} className="w-16 h-16 rounded-full border border-white/10 flex items-center justify-center text-white hover:bg-primary hover:text-black transition-all">
+                      <ChevronLeft size={24} />
+                    </button>
+                    <button onClick={next} className="w-16 h-16 rounded-full border border-white/10 flex items-center justify-center text-white hover:bg-primary hover:text-black transition-all">
+                      <ChevronRight size={24} />
+                    </button>
+                 </div>
               </div>
-              <h4 className="text-2xl font-bold text-white mb-6 uppercase">0{i+1}. {s.title}</h4>
-              <p className="text-gray-400 font-light leading-relaxed">{s.desc}</p>
-              <div className="ai-scan opacity-0 group-hover:opacity-100 transition-opacity"></div>
             </motion.div>
+          </AnimatePresence>
+        </div>
+        
+        <div className="mt-12 flex justify-center space-x-4">
+          {projects.map((_, i) => (
+            <div key={i} className={`h-1 transition-all duration-500 rounded-full ${i === index ? 'w-20 bg-primary' : 'w-10 bg-white/10'}`} />
           ))}
         </div>
       </div>
-    </section>
+    </motion.div>
   );
 };
 
 const ServicesGrid = () => {
+  const [selectedService, setSelectedService] = useState(null);
+
   const services = [
-    { title: "AI Commercial Video", desc: "Hollywood-grade cinematic commercials generated via custom neural engines.", img: "https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", icon: <Video /> },
-    { title: "Hyper-Growth Ads", desc: "Short-form AI content built for maximum ROI on TikTok, IG, and FB.", img: "https://images.pexels.com/photos/3585088/pexels-photo-3585088.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", icon: <Target /> },
-    { title: "Neural E-Com Engine", desc: "High-speed landing pages and stores optimized for 2026 sales psychology.", img: "https://images.pexels.com/photos/1181244/pexels-photo-1181244.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", icon: <ShoppingBag /> },
-    { title: "Autonomous CRM", desc: "Zero manual work. Automated lead nurturing and sales closing sequences.", img: "https://images.pexels.com/photos/373543/pexels-photo-373543.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", icon: <Workflow /> }
+    { 
+      title: "Commercial Video", 
+      desc: "Hollywood-grade cinematic commercials generated via custom AI neural engines.", 
+      img: "https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", 
+      icon: <Video />,
+      projects: [
+        { name: "Luxe Watch Launch", desc: "A cinematic AI-driven reveal of the 'Horizon' elite timepiece collection.", img: "https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" },
+        { name: "Global Fashion Week", desc: "Digital assets created for a NY-based fashion powerhouse using neural video generation.", img: "https://images.pexels.com/photos/3373739/pexels-photo-3373739.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" }
+      ]
+    },
+    { 
+      title: "Hyper-Growth Ads", 
+      desc: "Short-form AI content built for maximum ROI on TikTok, IG, and FB.", 
+      img: "https://images.pexels.com/photos/3585088/pexels-photo-3585088.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", 
+      icon: <Target />,
+      projects: [
+        { name: "E-Com Blitz", desc: "Reduced customer acquisition cost by 60% through AI-tested visual hooks.", img: "https://images.pexels.com/photos/34577/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" }
+      ]
+    },
+    { 
+      title: "Neural E-Com Engine", 
+      desc: "High-speed landing pages and stores optimized for 2026 sales psychology.", 
+      img: "https://images.pexels.com/photos/1181244/pexels-photo-1181244.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", 
+      icon: <ShoppingBag />,
+      projects: [
+        { name: "Ciatech Platform", desc: "Microsoft-certified infrastructure bult for extreme global scalability.", img: "https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" }
+      ]
+    },
+    { 
+      title: "Autonomous CRM", 
+      desc: "Zero manual work. Automated lead nurturing and sales closing sequences.", 
+      img: "https://images.pexels.com/photos/373543/pexels-photo-373543.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", 
+      icon: <Workflow />,
+      projects: [
+        { name: "Logistics Core", desc: "AI agents handling customer support and scheduling for a global carrier.", img: "https://images.pexels.com/photos/4483610/pexels-photo-4483610.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" }
+      ]
+    }
   ];
 
   return (
@@ -230,11 +312,16 @@ const ServicesGrid = () => {
       <div className="max-w-[1400px] mx-auto">
         <div className="mb-32 text-center">
           <h2 className="text-primary text-[10px] font-black uppercase tracking-[0.5em] mb-4">Our Elite Solutions</h2>
-          <h3 className="text-5xl md:text-9xl font-black text-white tracking-tighter">THE GROWTH SUITE.</h3>
+          <h3 className="text-5xl md:text-[120px] font-black text-white tracking-tighter uppercase leading-[0.85]">THE GROWTH <br /> SUITE.</h3>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
           {services.map((s, i) => (
-            <motion.div key={i} whileHover={{ y: -10 }} className="group relative rounded-[50px] overflow-hidden min-h-[500px] border border-white/5 shadow-2xl">
+            <motion.div 
+              key={i} 
+              whileHover={{ y: -10 }} 
+              onClick={() => setSelectedService(s)}
+              className="group relative rounded-[50px] overflow-hidden min-h-[500px] border border-white/5 shadow-2xl cursor-pointer"
+            >
               <img src={s.img} className="absolute inset-0 w-full h-full object-cover opacity-30 grayscale group-hover:grayscale-0 transition-all duration-1000 group-hover:scale-105" alt={s.title} />
               <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
               <div className="absolute inset-0 p-16 flex flex-col justify-between">
@@ -244,39 +331,34 @@ const ServicesGrid = () => {
                 <div>
                   <h4 className="text-4xl font-black text-white mb-6 uppercase italic tracking-tighter leading-none">{s.title}</h4>
                   <p className="text-gray-400 text-lg font-light leading-relaxed max-w-sm">{s.desc}</p>
+                  <div className="mt-8 flex items-center space-x-2 text-primary text-[9px] font-black uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-all translate-y-4 group-hover:translate-y-0">
+                     <span>View Case Studies</span> <ArrowRight size={12} />
+                  </div>
                 </div>
               </div>
             </motion.div>
           ))}
         </div>
       </div>
+      
+      <AnimatePresence>
+        {selectedService && (
+          <ServiceModal 
+            isOpen={!!selectedService} 
+            onClose={() => setSelectedService(null)} 
+            service={selectedService} 
+          />
+        )}
+      </AnimatePresence>
     </section>
   );
 };
 
 const TestimonialsSection = () => {
   const reviews = [
-    { 
-      name: "Jean Marc", 
-      role: "CEO, TechFlow", 
-      text: "BLDSCALE completely transformed our product launch. The AI video was cinematic and the sales automation saved us 20 hours a week.", 
-      avatar: "https://i.pravatar.cc/100?u=1",
-      stats: "Revenue increased by 45%"
-    },
-    { 
-      name: "Marie L.", 
-      role: "Founder, LuxeHaiti", 
-      text: "I've worked with many agencies, but none delivered this level of visual quality so fast. Truly the elite choice for high-end brands.", 
-      avatar: "https://i.pravatar.cc/100?u=2",
-      stats: "10k+ New Leads Generated"
-    },
-    { 
-      name: "Robert Smith", 
-      role: "Marketing Director", 
-      text: "Their automated e-commerce setup is a game changer. Our conversion rate jumped by 35% in just one month. Highly recommended.", 
-      avatar: "https://i.pravatar.cc/100?u=3",
-      stats: "3.5x Return on Ad Spend"
-    }
+    { name: "Jean Marc", role: "CEO, TechFlow", text: "BLDSCALE completely transformed our product launch. The AI video was cinematic and the sales automation saved us 20 hours a week.", avatar: "https://i.pravatar.cc/100?u=1", stats: "Revenue +45%" },
+    { name: "Marie L.", role: "Founder, LuxeHaiti", text: "I've worked with many agencies, but none delivered this level of visual quality so fast. Truly the elite choice.", avatar: "https://i.pravatar.cc/100?u=2", stats: "10k+ New Leads" },
+    { name: "Robert Smith", role: "Marketing Director", text: "Their automated e-commerce setup is a game changer. Our conversion rate jumped by 35% in just one month.", avatar: "https://i.pravatar.cc/100?u=3", stats: "3.5x ROAS" }
   ];
 
   return (
@@ -288,20 +370,21 @@ const TestimonialsSection = () => {
               <h3 className="text-5xl md:text-8xl font-black text-white tracking-tighter leading-none">THE VOICES <br /> OF SCALE.</h3>
            </div>
            <div className="lg:col-span-7 grid grid-cols-2 gap-10">
-              <div className="p-10 rounded-[30px] bg-white/5 border border-white/5">
-                 <div className="text-4xl font-black text-white mb-2">98%</div>
-                 <p className="text-gray-500 text-[10px] font-black uppercase tracking-widest">Client Retention</p>
+              <div className="p-10 rounded-[30px] bg-white/5 border border-white/5 shadow-inner">
+                 <div className="text-4xl font-black text-white mb-2 uppercase">98%</div>
+                 <p className="text-gray-500 text-[10px] font-black uppercase tracking-widest">Retention Rate</p>
               </div>
-              <div className="p-10 rounded-[30px] bg-white/5 border border-white/5">
-                 <div className="text-4xl font-black text-primary mb-2">$2M+</div>
-                 <p className="text-gray-500 text-[10px] font-black uppercase tracking-widest">Revenue Generated</p>
+              <div className="p-10 rounded-[30px] bg-white/5 border border-white/5 shadow-inner">
+                 <div className="text-4xl font-black text-primary mb-2 uppercase">$2M+</div>
+                 <p className="text-gray-500 text-[10px] font-black uppercase tracking-widest">Revenue Impact</p>
               </div>
            </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {reviews.map((r, i) => (
-            <motion.div key={i} whileHover={{ y: -15 }} className="p-12 rounded-[50px] bg-black border border-white/5 relative flex flex-col justify-between h-full shadow-2xl">
+            <motion.div key={i} whileHover={{ y: -15 }} className="p-12 rounded-[50px] bg-black border border-white/5 relative flex flex-col justify-between h-full shadow-2xl overflow-hidden group">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 blur-[50px] rounded-full"></div>
               <div>
                 <div className="flex space-x-1 mb-10">
                    {[...Array(5)].map((_, star) => <Star key={star} size={14} className="fill-primary text-primary" />)}
@@ -317,10 +400,11 @@ const TestimonialsSection = () => {
                     <p className="text-primary text-[10px] font-black uppercase tracking-widest">{r.role}</p>
                   </div>
                 </div>
-                <div className="pt-8 border-t border-white/5">
+                <div className="pt-8 border-t border-white/5 flex items-center justify-between">
                    <div className="flex items-center space-x-2 text-primary font-black text-[10px] uppercase tracking-[0.2em]">
                       <Check size={14} /> <span>{r.stats}</span>
                    </div>
+                   <Trophy size={20} className="text-gray-800" />
                 </div>
               </div>
             </motion.div>
@@ -346,7 +430,7 @@ const WorkArchive = () => (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-20">
            {[1, 2, 3, 4].map(i => (
              <div key={i} className="group cursor-pointer">
-                <div className="aspect-[16/11] rounded-[60px] overflow-hidden mb-12 border border-white/5 relative bg-white/5 shadow-2xl overflow-hidden">
+                <div className="aspect-[16/11] rounded-[60px] overflow-hidden mb-12 border border-white/5 relative bg-white/5 shadow-2xl">
                    <img src={`https://images.pexels.com/photos/${i === 1 ? '3183150' : i === 2 ? '190819' : i === 3 ? '4483610' : '3373739'}/pexels-photo-${i === 1 ? '3183150' : i === 2 ? '190819' : i === 3 ? '4483610' : '3373739'}.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2`} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 group-hover:scale-105" alt="Work" />
                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent opacity-60"></div>
                    <div className="absolute top-10 left-10 bg-black/60 backdrop-blur-md px-6 py-2 rounded-full border border-white/10 text-[9px] font-black text-white uppercase tracking-widest">Case Study 0{i}</div>
@@ -375,11 +459,11 @@ const StaffSection = () => {
   ];
 
   return (
-    <section id="staff" className="py-40 bg-[#050505] px-6 md:px-12">
+    <section id="staff" className="py-40 bg-[#050505] px-6 md:px-12 border-b border-white/5">
       <div className="max-w-[1400px] mx-auto">
         <div className="mb-32">
           <h2 className="text-primary text-[10px] font-black uppercase tracking-[0.5em] mb-4">The Staff</h2>
-          <h3 className="text-5xl md:text-8xl font-black text-white tracking-tighter">MINDS OF <br /> SCALE.</h3>
+          <h3 className="text-5xl md:text-9xl font-black text-white tracking-tighter">MINDS OF <br /> SCALE.</h3>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           {staff.map((m, i) => (
@@ -388,7 +472,7 @@ const StaffSection = () => {
                 <img src={m.img} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000" alt={m.name} />
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60"></div>
               </div>
-              <h4 className="text-3xl font-bold text-white mb-2 italic tracking-tighter">{m.name}</h4>
+              <h4 className="text-3xl font-bold text-white mb-2 italic tracking-tighter uppercase">{m.name}</h4>
               <p className="text-primary text-[10px] font-black uppercase tracking-[0.5em]">{m.role}</p>
             </motion.div>
           ))}
@@ -403,18 +487,18 @@ const ContactForm = () => (
     <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-24 items-center">
       <div className="lg:col-span-5">
          <h2 className="text-primary text-[10px] font-black uppercase tracking-[0.5em] mb-6">Partner With Us</h2>
-         <h3 className="text-5xl md:text-[140px] font-black text-white tracking-tighter leading-[0.8] mb-12">LET'S <br /> BUILD.</h3>
+         <h3 className="text-5xl md:text-[140px] font-black text-white tracking-tighter leading-[0.8] mb-12 uppercase">LET'S <br /> BUILD.</h3>
          <p className="text-gray-500 text-xl font-light leading-relaxed mb-20 max-w-sm">
             We only take 2 new partners per cycle to ensure elite results. Apply today for a growth consultation.
          </p>
          <div className="space-y-12">
             <div className="flex items-center space-x-8">
                <div className="w-16 h-16 rounded-3xl bg-white/5 flex items-center justify-center text-primary border border-white/5 shadow-inner"><Mail size={24} /></div>
-               <div><p className="text-[10px] font-black text-gray-700 uppercase tracking-widest mb-1">Direct Email</p><p className="text-2xl text-white font-black italic tracking-tighter">hello@bldscale.com</p></div>
+               <div><p className="text-[10px] font-black text-gray-700 uppercase tracking-widest mb-1">Direct Email</p><p className="text-2xl text-white font-black italic tracking-tighter uppercase">hello@bldscale.com</p></div>
             </div>
             <div className="flex items-center space-x-8">
                <div className="w-16 h-16 rounded-3xl bg-white/5 flex items-center justify-center text-primary border border-white/5 shadow-inner"><Phone size={24} /></div>
-               <div><p className="text-[10px] font-black text-gray-700 uppercase tracking-widest mb-1">Global Line</p><p className="text-2xl text-white font-black italic tracking-tighter">+509 4000 0000</p></div>
+               <div><p className="text-[10px] font-black text-gray-700 uppercase tracking-widest mb-1">Global Line</p><p className="text-2xl text-white font-black italic tracking-tighter uppercase">+509 4000 0000</p></div>
             </div>
          </div>
       </div>
@@ -456,7 +540,7 @@ const ContactForm = () => (
 const FinalFooter = () => (
   <footer className="bg-[#050505] pt-40 pb-12 border-t border-white/5 px-6 md:px-12">
     <div className="max-w-[1400px] mx-auto text-center">
-      <div className="text-6xl font-black tracking-[0.5em] text-white mb-12">BLDSCALE</div>
+      <div className="text-6xl font-black tracking-[0.5em] text-white mb-12 uppercase">BLDSCALE</div>
       <div className="flex justify-center space-x-12 mb-24 text-[10px] font-black text-gray-600 uppercase tracking-[0.4em]">
          <a href="#" className="hover:text-primary transition-all">Instagram</a>
          <a href="#" className="hover:text-primary transition-all">LinkedIn</a>
