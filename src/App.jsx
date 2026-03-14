@@ -6,7 +6,8 @@ import {
   Instagram, Twitter, Linkedin, Github, ArrowUp,
   Sparkles, ShoppingBag, Workflow, Database, PlayCircle, Plus,
   Star, Quote, Users, Clock, ShieldCheck, Mail, Phone, MapPin,
-  Bot, FastForward, TrendingUp, Award, Laptop, Eye, Terminal
+  Bot, FastForward, TrendingUp, Award, Laptop, Eye, Terminal,
+  TrendingDown, ThumbsUp, Trophy, Check
 } from 'lucide-react';
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 
@@ -72,11 +73,11 @@ const Navbar = () => (
       <div className="hidden lg:flex space-x-10 text-[9px] uppercase tracking-[0.5em] font-bold text-gray-500">
         <a href="#home" className="hover:text-primary transition-colors">Home</a>
         <a href="#services" className="hover:text-primary transition-colors">Services</a>
-        <a href="#work" className="hover:text-primary transition-colors">Work</a>
-        <a href="#staff" className="hover:text-primary transition-colors">Staff</a>
+        <a href="#work" className="hover:text-primary transition-colors">Portfolio</a>
+        <a href="#testimonials" className="hover:text-primary transition-colors">Testimonials</a>
       </div>
       <a href="#contact" className="bg-white text-black text-[10px] font-black uppercase tracking-widest px-8 py-3 rounded-xl hover:bg-primary transition-all shadow-lg">
-        Inquiry
+        Inquire
       </a>
     </div>
   </nav>
@@ -120,7 +121,7 @@ const Hero = () => {
             </div>
             
             <div className="min-h-[250px] md:min-h-[450px]">
-              <h1 className="text-6xl md:text-[130px] lg:text-[160px] font-black leading-[0.85] tracking-tighter text-white mb-10">
+              <h1 className="text-6xl md:text-[130px] lg:text-[160px] font-black leading-[0.85] tracking-tighter text-white mb-10 uppercase">
                 {text.split(" ").map((word, i) => (
                   <React.Fragment key={i}>
                     {word === "SCALE" ? (
@@ -141,7 +142,7 @@ const Hero = () => {
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-4xl">
                <p className="text-gray-500 text-lg md:text-xl font-light leading-relaxed border-l border-white/10 pl-8">
-                 We engineer cinematic AI commercials and automated digital ecosystems that put your brand on hyper-growth mode. 
+                 We architect cinematic AI commercials and autonomous digital ecosystems. Zero friction. 100% Brand Authority. 
                </p>
                <div className="flex flex-col justify-end">
                   <a href="#contact" className="group flex items-center space-x-6 text-white overflow-hidden">
@@ -149,8 +150,8 @@ const Hero = () => {
                       <MoveRight size={32} />
                     </div>
                     <div className="flex flex-col items-start text-left">
-                       <span className="text-xs font-black uppercase tracking-widest text-primary">Join the Future</span>
-                       <span className="text-[10px] font-bold text-gray-600 uppercase tracking-widest">Reserve Your Slot</span>
+                       <span className="text-xs font-black uppercase tracking-widest text-primary">Start Growing</span>
+                       <span className="text-[10px] font-bold text-gray-600 uppercase tracking-widest">Limited Slots Available</span>
                     </div>
                   </a>
                </div>
@@ -168,31 +169,53 @@ const Hero = () => {
   );
 };
 
-const ProcessSection = () => {
+const SocialProof = () => (
+  <section className="py-20 bg-white/5 border-y border-white/5 overflow-hidden whitespace-nowrap">
+    <div className="animate-marquee flex items-center">
+      {[...Array(2)].map((_, i) => (
+        <div key={i} className="flex space-x-20 items-center px-10">
+          <span className="text-3xl font-black text-white/10 uppercase tracking-widest italic">trusted by 50+ elite brands</span>
+          <Plus className="text-primary" />
+          <span className="text-3xl font-black text-white/10 uppercase tracking-widest italic">driven by ai neural engines</span>
+          <Plus className="text-primary" />
+          <span className="text-3xl font-black text-white/10 uppercase tracking-widest italic">autonomous scale systems</span>
+          <Plus className="text-primary" />
+        </div>
+      ))}
+    </div>
+  </section>
+);
+
+const ConversionProcess = () => {
   const steps = [
-    { title: "Analysis", desc: "We deep-dive into your data to identify growth bottlenecks.", icon: <BarChart3 size={48} /> },
-    { title: "AI Generation", desc: "Our neural engines craft your high-end cinematic commercials.", icon: <Bot size={48} /> },
-    { title: "System Build", desc: "We architect your automated e-commerce or landing engine.", icon: <Terminal size={48} /> },
-    { title: "Hyper Scale", desc: "Aggressive ad deployment and data-driven optimization.", icon: <TrendingUp size={48} /> }
+    { title: "Strategic Audit", desc: "We dissect your current sales process to find every leaking dollar.", icon: <Eye /> },
+    { title: "AI Neural Assets", desc: "We generate cinematic video ads that stop the scroll instantly.", icon: <Bot /> },
+    { title: "Conversion Engine", desc: "We build your high-converting, automated sales infrastructure.", icon: <Zap /> },
+    { title: "Aggressive Scale", desc: "Data-driven ad deployment to multiply your revenue 24/7.", icon: <TrendingUp /> }
   ];
 
   return (
-    <section className="py-40 bg-navy-950 px-6 md:px-12 border-y border-white/5">
+    <section className="py-40 bg-[#050505] px-6 md:px-12 border-b border-white/5">
       <div className="max-w-[1400px] mx-auto">
-        <div className="mb-32">
-          <h2 className="text-primary text-[10px] font-black uppercase tracking-[0.5em] mb-4">How We Work</h2>
-          <h3 className="text-5xl md:text-8xl font-black text-white tracking-tighter">THE BLUEPRINT.</h3>
+        <div className="mb-32 flex flex-col md:flex-row justify-between items-end gap-10">
+          <div>
+            <h2 className="text-primary text-[10px] font-black uppercase tracking-[0.5em] mb-4">The Conversion Formula</h2>
+            <h3 className="text-5xl md:text-9xl font-black text-white tracking-tighter leading-none">HOW WE <br /> DOMINATE.</h3>
+          </div>
+          <p className="text-gray-500 max-w-sm font-light text-lg border-l border-primary pl-8">
+            Most agencies guess. We engineer. Using neural intelligence to predict and drive human action.
+          </p>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {steps.map((s, i) => (
-            <div key={i} className="relative group">
-              <div className="text-primary mb-10 transform group-hover:scale-110 transition-transform">
-                {s.icon}
+            <motion.div key={i} whileHover={{ y: -10 }} className="p-12 rounded-[40px] bg-white/5 border border-white/5 group relative overflow-hidden">
+              <div className="text-primary mb-12 transform group-hover:scale-110 transition-transform">
+                {React.cloneElement(s.icon, { size: 48 })}
               </div>
-              <h4 className="text-2xl font-bold text-white mb-6">0{i+1}. {s.title}</h4>
-              <p className="text-gray-500 font-light leading-relaxed">{s.desc}</p>
-              <div className="absolute -bottom-10 left-0 w-0 h-[1px] bg-primary group-hover:w-full transition-all duration-700"></div>
-            </div>
+              <h4 className="text-2xl font-bold text-white mb-6 uppercase">0{i+1}. {s.title}</h4>
+              <p className="text-gray-400 font-light leading-relaxed">{s.desc}</p>
+              <div className="ai-scan opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            </motion.div>
           ))}
         </div>
       </div>
@@ -200,29 +223,34 @@ const ProcessSection = () => {
   );
 };
 
-const ServicesSection = () => {
+const ServicesGrid = () => {
   const services = [
-    { title: "Commercial Video", desc: "High-end AI-generated cinematic brand stories.", img: "https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" },
-    { title: "Ads Video", desc: "Short-form AI content built for hyper-conversions.", img: "https://images.pexels.com/photos/3585088/pexels-photo-3585088.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" },
-    { title: "Elite Website", desc: "Neural-optimized e-commerce engines and landing pages.", img: "https://images.pexels.com/photos/1181244/pexels-photo-1181244.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" },
-    { title: "Full Automation", desc: "Autonomous AI workflows for sales and support.", img: "https://images.pexels.com/photos/373543/pexels-photo-373543.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" }
+    { title: "AI Commercial Video", desc: "Hollywood-grade cinematic commercials generated via custom neural engines.", img: "https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", icon: <Video /> },
+    { title: "Hyper-Growth Ads", desc: "Short-form AI content built for maximum ROI on TikTok, IG, and FB.", img: "https://images.pexels.com/photos/3585088/pexels-photo-3585088.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", icon: <Target /> },
+    { title: "Neural E-Com Engine", desc: "High-speed landing pages and stores optimized for 2026 sales psychology.", img: "https://images.pexels.com/photos/1181244/pexels-photo-1181244.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", icon: <ShoppingBag /> },
+    { title: "Autonomous CRM", desc: "Zero manual work. Automated lead nurturing and sales closing sequences.", img: "https://images.pexels.com/photos/373543/pexels-photo-373543.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2", icon: <Workflow /> }
   ];
 
   return (
     <section id="services" className="py-40 bg-[#050505] px-6 md:px-12">
       <div className="max-w-[1400px] mx-auto">
-        <div className="mb-32">
-          <h2 className="text-primary text-[10px] font-black uppercase tracking-[0.5em] mb-4">What We Do</h2>
-          <h3 className="text-5xl md:text-8xl font-black text-white tracking-tighter">ELITE SUITE.</h3>
+        <div className="mb-32 text-center">
+          <h2 className="text-primary text-[10px] font-black uppercase tracking-[0.5em] mb-4">Our Elite Solutions</h2>
+          <h3 className="text-5xl md:text-9xl font-black text-white tracking-tighter">THE GROWTH SUITE.</h3>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
           {services.map((s, i) => (
-            <motion.div key={i} whileHover={{ y: -10 }} className="group relative rounded-[40px] overflow-hidden aspect-[16/9] border border-white/5 shadow-2xl">
-              <img src={s.img} className="w-full h-full object-cover opacity-40 grayscale group-hover:grayscale-0 transition-all duration-1000 group-hover:scale-105" alt={s.title} />
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
-              <div className="absolute inset-0 p-12 flex flex-col justify-end">
-                <h4 className="text-4xl font-black text-white mb-4 italic tracking-tighter uppercase">{s.title}</h4>
-                <p className="text-gray-400 font-light max-w-sm">{s.desc}</p>
+            <motion.div key={i} whileHover={{ y: -10 }} className="group relative rounded-[50px] overflow-hidden min-h-[500px] border border-white/5 shadow-2xl">
+              <img src={s.img} className="absolute inset-0 w-full h-full object-cover opacity-30 grayscale group-hover:grayscale-0 transition-all duration-1000 group-hover:scale-105" alt={s.title} />
+              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
+              <div className="absolute inset-0 p-16 flex flex-col justify-between">
+                <div className="text-primary transform group-hover:rotate-12 transition-transform">
+                  {React.cloneElement(s.icon, { size: 40 })}
+                </div>
+                <div>
+                  <h4 className="text-4xl font-black text-white mb-6 uppercase italic tracking-tighter leading-none">{s.title}</h4>
+                  <p className="text-gray-400 text-lg font-light leading-relaxed max-w-sm">{s.desc}</p>
+                </div>
               </div>
             </motion.div>
           ))}
@@ -232,30 +260,73 @@ const ServicesSection = () => {
   );
 };
 
-const Testimonials = () => {
+const TestimonialsSection = () => {
   const reviews = [
-    { name: "Jean Marc", role: "CEO, TechFlow", text: "BLDSCALE completely transformed our product launch. The AI video was cinematic and the sales automation saved us 20 hours a week.", avatar: "https://i.pravatar.cc/100?u=1" },
-    { name: "Marie L.", role: "Founder, LuxeHaiti", text: "I've worked with many agencies, but none delivered this level of visual quality so fast. Truly the elite choice.", avatar: "https://i.pravatar.cc/100?u=2" },
-    { name: "Robert Smith", role: "Marketing Director", text: "Their automated e-commerce setup is a game changer. Our conversion rate jumped by 35% in just one month.", avatar: "https://i.pravatar.cc/100?u=3" }
+    { 
+      name: "Jean Marc", 
+      role: "CEO, TechFlow", 
+      text: "BLDSCALE completely transformed our product launch. The AI video was cinematic and the sales automation saved us 20 hours a week.", 
+      avatar: "https://i.pravatar.cc/100?u=1",
+      stats: "Revenue increased by 45%"
+    },
+    { 
+      name: "Marie L.", 
+      role: "Founder, LuxeHaiti", 
+      text: "I've worked with many agencies, but none delivered this level of visual quality so fast. Truly the elite choice for high-end brands.", 
+      avatar: "https://i.pravatar.cc/100?u=2",
+      stats: "10k+ New Leads Generated"
+    },
+    { 
+      name: "Robert Smith", 
+      role: "Marketing Director", 
+      text: "Their automated e-commerce setup is a game changer. Our conversion rate jumped by 35% in just one month. Highly recommended.", 
+      avatar: "https://i.pravatar.cc/100?u=3",
+      stats: "3.5x Return on Ad Spend"
+    }
   ];
 
   return (
-    <section className="py-40 bg-[#050505] px-6 md:px-12 border-t border-white/5">
+    <section id="testimonials" className="py-40 bg-navy-950 px-6 md:px-12 border-y border-white/5">
       <div className="max-w-[1400px] mx-auto">
-        <div className="mb-20 text-center">
-          <h2 className="text-primary text-[10px] font-black uppercase tracking-[0.5em] mb-4">Client Feedback</h2>
-          <h3 className="text-4xl md:text-7xl font-bold text-white tracking-tighter">TRUSTED BY ELITES.</h3>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-20 items-center mb-32">
+           <div className="lg:col-span-5">
+              <h2 className="text-primary text-[10px] font-black uppercase tracking-[0.5em] mb-6">Client Success</h2>
+              <h3 className="text-5xl md:text-8xl font-black text-white tracking-tighter leading-none">THE VOICES <br /> OF SCALE.</h3>
+           </div>
+           <div className="lg:col-span-7 grid grid-cols-2 gap-10">
+              <div className="p-10 rounded-[30px] bg-white/5 border border-white/5">
+                 <div className="text-4xl font-black text-white mb-2">98%</div>
+                 <p className="text-gray-500 text-[10px] font-black uppercase tracking-widest">Client Retention</p>
+              </div>
+              <div className="p-10 rounded-[30px] bg-white/5 border border-white/5">
+                 <div className="text-4xl font-black text-primary mb-2">$2M+</div>
+                 <p className="text-gray-500 text-[10px] font-black uppercase tracking-widest">Revenue Generated</p>
+              </div>
+           </div>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {reviews.map((r, i) => (
-            <motion.div key={i} whileHover={{ y: -10 }} className="p-12 rounded-[40px] bg-white/5 border border-white/5 relative shadow-xl">
-              <Quote className="text-primary mb-8 opacity-20" size={40} />
-              <p className="text-gray-400 text-lg font-light leading-relaxed mb-10 italic">"{r.text}"</p>
-              <div className="flex items-center space-x-4">
-                <img src={r.avatar} className="w-12 h-12 rounded-full border border-primary/30" alt={r.name} />
-                <div>
-                  <h4 className="text-white font-bold">{r.name}</h4>
-                  <p className="text-primary text-[10px] font-black uppercase tracking-widest">{r.role}</p>
+            <motion.div key={i} whileHover={{ y: -15 }} className="p-12 rounded-[50px] bg-black border border-white/5 relative flex flex-col justify-between h-full shadow-2xl">
+              <div>
+                <div className="flex space-x-1 mb-10">
+                   {[...Array(5)].map((_, star) => <Star key={star} size={14} className="fill-primary text-primary" />)}
+                </div>
+                <Quote className="text-primary mb-10 opacity-10 absolute top-10 right-10" size={60} />
+                <p className="text-gray-300 text-xl font-light leading-relaxed mb-12 italic">"{r.text}"</p>
+              </div>
+              <div>
+                <div className="flex items-center space-x-4 mb-8">
+                  <img src={r.avatar} className="w-14 h-14 rounded-2xl border-2 border-primary/20" alt={r.name} />
+                  <div>
+                    <h4 className="text-white font-bold text-lg">{r.name}</h4>
+                    <p className="text-primary text-[10px] font-black uppercase tracking-widest">{r.role}</p>
+                  </div>
+                </div>
+                <div className="pt-8 border-t border-white/5">
+                   <div className="flex items-center space-x-2 text-primary font-black text-[10px] uppercase tracking-[0.2em]">
+                      <Check size={14} /> <span>{r.stats}</span>
+                   </div>
                 </div>
               </div>
             </motion.div>
@@ -266,19 +337,35 @@ const Testimonials = () => {
   );
 };
 
-const WorkSection = () => (
-  <section id="work" className="py-40 bg-[#050505] px-6 md:px-12 border-t border-white/5">
+const WorkArchive = () => (
+  <section id="work" className="py-40 bg-[#050505] px-6 md:px-12 border-b border-white/5">
      <div className="max-w-[1400px] mx-auto">
-        <h2 className="text-primary text-[10px] font-black uppercase tracking-[0.5em] mb-6">Archive</h2>
-        <h3 className="text-5xl md:text-[140px] font-black text-white tracking-tighter leading-[0.8] mb-20">SELECTED <br /> PROJECTS.</h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-20 mb-40">
+        <div className="flex flex-col md:flex-row justify-between items-end mb-32 gap-10">
+          <div>
+            <h2 className="text-primary text-[10px] font-black uppercase tracking-[0.5em] mb-6">Archive</h2>
+            <h3 className="text-5xl md:text-[120px] font-black text-white tracking-tighter leading-[0.8]">SELECTED <br /> PROJECTS.</h3>
+          </div>
+          <button className="text-primary text-[10px] font-black uppercase tracking-widest flex items-center group">
+             View Full Archive <ArrowRight className="ml-3 group-hover:translate-x-2 transition-transform" />
+          </button>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-20">
            {[1, 2, 3, 4].map(i => (
              <div key={i} className="group cursor-pointer">
-                <div className="aspect-[16/10] rounded-[60px] overflow-hidden mb-10 border border-white/5 relative bg-white/5 shadow-2xl">
+                <div className="aspect-[16/11] rounded-[60px] overflow-hidden mb-12 border border-white/5 relative bg-white/5 shadow-2xl overflow-hidden">
                    <img src={`https://images.pexels.com/photos/${i === 1 ? '3183150' : i === 2 ? '190819' : i === 3 ? '4483610' : '3373739'}/pexels-photo-${i === 1 ? '3183150' : i === 2 ? '190819' : i === 3 ? '4483610' : '3373739'}.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2`} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 group-hover:scale-105" alt="Work" />
-                   <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-40"></div>
+                   <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent opacity-60"></div>
+                   <div className="absolute top-10 left-10 bg-black/60 backdrop-blur-md px-6 py-2 rounded-full border border-white/10 text-[9px] font-black text-white uppercase tracking-widest">Case Study 0{i}</div>
                 </div>
-                <h4 className="text-3xl font-bold text-white group-hover:text-primary transition-colors italic">0{i} / Global Scale Project</h4>
+                <div className="flex justify-between items-end px-4">
+                  <div>
+                    <p className="text-primary text-[10px] font-black uppercase tracking-widest mb-3">0{i} / 2026</p>
+                    <h4 className="text-5xl font-black text-white group-hover:text-primary transition-colors italic tracking-tighter uppercase">{i === 1 ? 'Global Scale' : i === 2 ? 'Luxe Narrative' : i === 3 ? 'E-Com Core' : 'Growth Asset'}</h4>
+                  </div>
+                  <div className="w-16 h-16 rounded-full border border-white/10 flex items-center justify-center text-white group-hover:bg-primary group-hover:text-black transition-all">
+                    <ArrowRight size={24} className="-rotate-45" />
+                  </div>
+                </div>
              </div>
            ))}
         </div>
@@ -286,7 +373,7 @@ const WorkSection = () => (
   </section>
 );
 
-const TeamSection = () => {
+const StaffSection = () => {
   const staff = [
     { name: "Dawensky T.", role: "Founder & Chief Architect", img: "https://images.pexels.com/photos/2182970/pexels-photo-2182970.jpeg?auto=compress&cs=tinysrgb&w=600" },
     { name: "Daky", role: "AI Creative Lead", img: "https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=600" },
@@ -294,7 +381,7 @@ const TeamSection = () => {
   ];
 
   return (
-    <section id="staff" className="py-40 bg-[#050505] px-6 md:px-12 border-t border-white/5">
+    <section id="staff" className="py-40 bg-[#050505] px-6 md:px-12">
       <div className="max-w-[1400px] mx-auto">
         <div className="mb-32">
           <h2 className="text-primary text-[10px] font-black uppercase tracking-[0.5em] mb-4">The Staff</h2>
@@ -303,11 +390,11 @@ const TeamSection = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           {staff.map((m, i) => (
             <motion.div key={i} whileHover={{ y: -10 }} className="group">
-              <div className="aspect-[4/5] rounded-[40px] overflow-hidden mb-8 border border-white/5 grayscale group-hover:grayscale-0 transition-all duration-700 relative shadow-2xl">
+              <div className="aspect-[4/5] rounded-[50px] overflow-hidden mb-10 border border-white/5 grayscale group-hover:grayscale-0 transition-all duration-700 relative shadow-2xl">
                 <img src={m.img} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000" alt={m.name} />
-                <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-60"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60"></div>
               </div>
-              <h4 className="text-3xl font-bold text-white mb-2">{m.name}</h4>
+              <h4 className="text-3xl font-bold text-white mb-2 italic tracking-tighter">{m.name}</h4>
               <p className="text-primary text-[10px] font-black uppercase tracking-[0.5em]">{m.role}</p>
             </motion.div>
           ))}
@@ -317,64 +404,80 @@ const TeamSection = () => {
   );
 };
 
-const ContactSection = () => (
+const ContactForm = () => (
   <section id="contact" className="py-40 bg-[#050505] px-6 md:px-12 border-t border-white/5">
-    <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20">
-      <div>
-         <h2 className="text-primary text-[10px] font-black uppercase tracking-[0.5em] mb-6">Contact Us</h2>
-         <h3 className="text-5xl md:text-[140px] font-black text-white tracking-tighter leading-[0.8] mb-10">START <br /> SCALING.</h3>
-         <div className="space-y-12 mt-20">
-            <div className="flex items-center space-x-6">
-               <div className="w-16 h-16 rounded-full bg-white/5 flex items-center justify-center text-primary border border-white/5 shadow-inner"><Mail /></div>
-               <div><p className="text-[10px] font-black text-gray-600 uppercase tracking-widest">Email</p><p className="text-xl text-white font-bold">hello@bldscale.com</p></div>
+    <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-24 items-center">
+      <div className="lg:col-span-5">
+         <h2 className="text-primary text-[10px] font-black uppercase tracking-[0.5em] mb-6">Partner With Us</h2>
+         <h3 className="text-5xl md:text-[140px] font-black text-white tracking-tighter leading-[0.8] mb-12">LET'S <br /> BUILD.</h3>
+         <p className="text-gray-500 text-xl font-light leading-relaxed mb-20 max-w-sm">
+            We only take 2 new partners per cycle to ensure elite results. Apply today for a growth consultation.
+         </p>
+         <div className="space-y-12">
+            <div className="flex items-center space-x-8">
+               <div className="w-16 h-16 rounded-3xl bg-white/5 flex items-center justify-center text-primary border border-white/5 shadow-inner"><Mail size={24} /></div>
+               <div><p className="text-[10px] font-black text-gray-700 uppercase tracking-widest mb-1">Direct Email</p><p className="text-2xl text-white font-black italic tracking-tighter">hello@bldscale.com</p></div>
             </div>
-            <div className="flex items-center space-x-6">
-               <div className="w-16 h-16 rounded-full bg-white/5 flex items-center justify-center text-primary border border-white/5 shadow-inner"><Phone /></div>
-               <div><p className="text-[10px] font-black text-gray-600 uppercase tracking-widest">Phone</p><p className="text-xl text-white font-bold">+509 4000 0000</p></div>
+            <div className="flex items-center space-x-8">
+               <div className="w-16 h-16 rounded-3xl bg-white/5 flex items-center justify-center text-primary border border-white/5 shadow-inner"><Phone size={24} /></div>
+               <div><p className="text-[10px] font-black text-gray-700 uppercase tracking-widest mb-1">Global Line</p><p className="text-2xl text-white font-black italic tracking-tighter">+509 4000 0000</p></div>
             </div>
          </div>
       </div>
-      <div className="p-12 rounded-[40px] bg-white/5 border border-white/5 shadow-2xl">
-         <form className="space-y-8" onSubmit={e => e.preventDefault()}>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-               <input type="text" placeholder="Name" className="w-full bg-black/50 border border-white/10 rounded-2xl p-5 text-white outline-none focus:border-primary" />
-               <input type="email" placeholder="Email" className="w-full bg-black/50 border border-white/10 rounded-2xl p-5 text-white outline-none focus:border-primary" />
+      <div className="lg:col-span-7 p-16 rounded-[60px] bg-white/5 border border-white/5 shadow-2xl relative overflow-hidden">
+         <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 blur-[100px] rounded-full -mr-32 -mt-32"></div>
+         <form className="space-y-10 relative z-10" onSubmit={e => e.preventDefault()}>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+               <div className="space-y-3">
+                  <label className="text-[9px] font-black text-gray-600 uppercase tracking-widest ml-1">Company Name</label>
+                  <input type="text" placeholder="Lux Media" className="w-full bg-transparent border-b border-white/10 py-5 text-white outline-none focus:border-primary transition-all text-lg font-light" />
+               </div>
+               <div className="space-y-3">
+                  <label className="text-[9px] font-black text-gray-600 uppercase tracking-widest ml-1">Work Email</label>
+                  <input type="email" placeholder="ceo@company.com" className="w-full bg-transparent border-b border-white/10 py-5 text-white outline-none focus:border-primary transition-all text-lg font-light" />
+               </div>
             </div>
-            <select className="w-full bg-black/50 border border-white/10 rounded-2xl p-5 text-white outline-none focus:border-primary appearance-none">
-               <option>Commercial Video</option>
-               <option>Ads Video</option>
-               <option>Website Development</option>
-               <option>Automation</option>
-            </select>
-            <textarea placeholder="Tell us about your project" className="w-full bg-black/50 border border-white/10 rounded-2xl p-5 text-white outline-none focus:border-primary h-40"></textarea>
-            <button className="w-full bg-primary text-black font-black py-6 rounded-2xl hover:bg-white transition-all shadow-xl shadow-primary/20">SUBMIT APPLICATION</button>
+            <div className="space-y-3">
+               <label className="text-[9px] font-black text-gray-600 uppercase tracking-widest ml-1">Primary Objective</label>
+               <select className="w-full bg-transparent border-b border-white/10 py-5 text-white outline-none focus:border-primary appearance-none text-lg font-light">
+                  <option className="bg-black">Full Scale Transformation</option>
+                  <option className="bg-black">AI Video Production</option>
+                  <option className="bg-black">E-Com Core Engine</option>
+                  <option className="bg-black">Automation Ecosystem</option>
+               </select>
+            </div>
+            <div className="space-y-3">
+               <label className="text-[9px] font-black text-gray-600 uppercase tracking-widest ml-1">Project Details</label>
+               <textarea placeholder="Briefly describe your current bottlenecks..." className="w-full bg-transparent border-b border-white/10 py-5 text-white outline-none focus:border-primary h-32 resize-none text-lg font-light"></textarea>
+            </div>
+            <button className="w-full bg-primary text-black font-black py-8 rounded-[30px] text-xs uppercase tracking-[0.4em] hover:bg-white transition-all shadow-2xl shadow-primary/20 flex items-center justify-center group">
+               SUBMIT FOR AUDIT <MoveRight className="ml-4 group-hover:translate-x-2 transition-transform" />
+            </button>
          </form>
       </div>
     </div>
   </section>
 );
 
-const Footer = () => (
+const FinalFooter = () => (
   <footer className="bg-[#050505] pt-40 pb-12 border-t border-white/5 px-6 md:px-12">
     <div className="max-w-[1400px] mx-auto text-center">
-      <div className="text-4xl font-black tracking-[0.4em] text-white mb-10">BLDSCALE</div>
-      <div className="flex justify-center space-x-10 mb-20 text-[10px] font-black text-gray-600 uppercase tracking-[0.3em]">
-         <a href="#" className="hover:text-primary">Instagram</a>
-         <a href="#" className="hover:text-primary">LinkedIn</a>
-         <a href="#" className="hover:text-primary">Twitter</a>
+      <div className="text-6xl font-black tracking-[0.5em] text-white mb-12">BLDSCALE</div>
+      <div className="flex justify-center space-x-12 mb-24 text-[10px] font-black text-gray-600 uppercase tracking-[0.4em]">
+         <a href="#" className="hover:text-primary transition-all">Instagram</a>
+         <a href="#" className="hover:text-primary transition-all">LinkedIn</a>
+         <a href="#" className="hover:text-primary transition-all">Twitter</a>
+         <a href="#" className="hover:text-primary transition-all">Behance</a>
       </div>
-      <div className="text-[8px] text-gray-800 font-black uppercase tracking-[0.5em] pt-12 border-t border-white/5">
-        © 2026 BLDSCALE — ARCHITECTED IN EXCELLENCE | Designed by Daky_400$/day
+      <div className="text-[9px] text-gray-800 font-black uppercase tracking-[0.6em] pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
+        <p>© 2026 BLDSCALE — THE APEX OF DIGITAL ARCHITECTURE</p>
+        <p className="italic">Architected with Excellence by Daky_400$/day</p>
       </div>
     </div>
   </footer>
 );
 
 function App() {
-  useEffect(() => {
-    console.log("App mounted");
-  }, []);
-
   return (
     <div className="bg-[#050505] selection:bg-primary selection:text-black cursor-none scroll-smooth">
       <CustomCursor />
@@ -383,22 +486,16 @@ function App() {
       
       <main>
         <Hero />
-        <section className="py-24 bg-white/5 border-y border-white/5 flex justify-center items-center space-x-20 overflow-hidden">
-           <div className="flex space-x-20 animate-marquee whitespace-nowrap">
-              {[...Array(10)].map((_, i) => (
-                <span key={i} className="text-4xl font-black text-white/5 uppercase italic tracking-widest">AI-FIRST MEDIA • AUTOMATION • GROWTH •</span>
-              ))}
-           </div>
-        </section>
-        <ProcessSection />
-        <ServicesSection />
-        <Testimonials />
-        <WorkSection />
-        <TeamSection />
-        <ContactSection />
+        <SocialProof />
+        <ConversionProcess />
+        <ServicesGrid />
+        <TestimonialsSection />
+        <WorkArchive />
+        <StaffSection />
+        <ContactForm />
       </main>
 
-      <Footer />
+      <FinalFooter />
     </div>
   );
 }
